@@ -100,6 +100,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         mLocationRequest.setInterval(100000);
 
+        // Taken from http://developer.android.com/training/permissions/requesting.html
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == mPackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -119,10 +120,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Taken from http://developer.android.com/training/permissions/requesting.html
         switch(requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
-                if (grantResults.length > 0
-                        && grantResults[0] == mPackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == mPackageManager.PERMISSION_GRANTED) {
                     // TODO: Not sure if this code is run
                     //mapTitle.setText(String.valueOf(mLastLocation.getLatitude()));
                 }
@@ -144,11 +146,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.v(LOG_TAG, "location changed");
+        Log.v(LOG_TAG, location.toString());
+
         mLastLocation = location;
-        Log.v(LOG_TAG, mLastLocation.toString());
+        mapTitle.setText(String.valueOf(location.getLatitude()) +", " + String.valueOf(location.getLongitude()));
+        showHome();
+    }
+
+    public void showHome() {
         if (mLastLocation != null) {
-            mapTitle.setText(String.valueOf(mLastLocation.getLatitude()) +", " + String.valueOf(mLastLocation.getLongitude()));
+            LatLng home = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mMap.moveCamera((CameraUpdateFactory.newLatLng(home)));
         }
     }
 }
