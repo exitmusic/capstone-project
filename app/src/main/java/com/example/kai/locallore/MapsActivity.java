@@ -3,12 +3,14 @@ package com.example.kai.locallore;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,8 +24,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+
+    private final String LOG_TAG = MapsActivity.class.getSimpleName();
+    private final int MY_PERMISSIONS_REQUEST_LOCATION = 3;
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -31,10 +39,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected Location mLastLocation;
     protected PackageManager mPackageManager;
 
+    @Bind(R.id.map_title) TextView mapTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        ButterKnife.bind(this);
+        mPackageManager = getApplicationContext().getPackageManager();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
@@ -86,32 +98,57 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        mLocationRequest.setInterval(10000);
+        mLocationRequest.setInterval(100000);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == mPackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+            // TODO: This returns null for some reason
+            //mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
         }
 
-        if (mLastLocation != null) {
-            String.valueOf(mLastLocation.getLatitude());
-            String.valueOf(mLastLocation.getLongitude());
+        //mapTitle.setText(String.valueOf(mLastLocation.getLatitude()));
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == mPackageManager.PERMISSION_GRANTED) {
+                    // TODO: Not sure if this code is run
+                    //mapTitle.setText(String.valueOf(mLastLocation.getLatitude()));
+                }
+            }
         }
     }
 
     @Override
     public void onConnectionSuspended(int i) {
+        Log.v(LOG_TAG, "connection susupended");
 
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.v(LOG_TAG, "connection failed");
 
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.v(LOG_TAG, "location changed");
         mLastLocation = location;
+        Log.v(LOG_TAG, mLastLocation.toString());
+        if (mLastLocation != null) {
+            mapTitle.setText(String.valueOf(mLastLocation.getLatitude()) +", " + String.valueOf(mLastLocation.getLongitude()));
+        }
     }
 }
