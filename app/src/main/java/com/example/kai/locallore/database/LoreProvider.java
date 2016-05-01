@@ -15,6 +15,10 @@ public class LoreProvider {
     public static final String AUTHORITY = "com.example.kai.locallore.LoreProvider";
     static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
+    interface Path {
+        String LORE = "lore";
+    }
+
     @TableEndpoint(table = LoreDatabase.LORE)
     public static class Lore {
         @ContentUri(
