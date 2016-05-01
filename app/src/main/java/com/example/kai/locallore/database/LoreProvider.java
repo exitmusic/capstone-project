@@ -13,6 +13,7 @@ import net.simonvt.schematic.annotation.TableEndpoint;
 public class LoreProvider {
 
     public static final String AUTHORITY = "com.example.kai.locallore.LoreProvider";
+    static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     @TableEndpoint(table = LoreDatabase.LORE)
     public static class Lore {
