@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import net.simonvt.schematic.annotation.ContentProvider;
 import net.simonvt.schematic.annotation.ContentUri;
+import net.simonvt.schematic.annotation.InexactContentUri;
 import net.simonvt.schematic.annotation.TableEndpoint;
 
 /**
@@ -33,8 +34,19 @@ public class LoreProvider {
     public static class Lore {
         @ContentUri(
                 path = Path.LORE,
-                type = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + Path.LORE,
-                defaultSort = LoreColumns.TITLE + " ASC")
-        public static final Uri LORE = Uri.parse("content://" + AUTHORITY + "lore");
+                type = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + Path.LORE
+        )
+        public static final Uri CONTENT_URI = buildUri(Path.LORE);
+
+        @InexactContentUri(
+                name = "LORE_ID",
+                path = Path.LORE + "/*",
+                type = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + Path.LORE,
+                whereColumn = LoreColumns._ID,
+                pathSegment = 1
+        )
+        public static Uri withId(String id) {
+            return buildUri(Path.LORE, id);
+        }
     }
 }
