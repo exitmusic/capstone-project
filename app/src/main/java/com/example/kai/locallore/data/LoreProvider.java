@@ -40,13 +40,13 @@ public class LoreProvider {
 
         @InexactContentUri(
                 name = "LORE_ID",
-                path = Path.LORE + "/*",
+                path = Path.LORE + "/#",
                 type = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + Path.LORE,
                 whereColumn = LoreColumns._ID,
                 pathSegment = 1
         )
-        public static Uri withId(String id) {
-            return buildUri(Path.LORE, id);
+        public static Uri withId(long id) {
+            return buildUri(Path.LORE, String.valueOf(id);
         }
     }
 }
