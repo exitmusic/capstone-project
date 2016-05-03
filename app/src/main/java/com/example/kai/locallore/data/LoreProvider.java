@@ -1,4 +1,4 @@
-package com.example.kai.locallore.database;
+package com.example.kai.locallore.data;
 
 import android.content.ContentResolver;
 import android.net.Uri;

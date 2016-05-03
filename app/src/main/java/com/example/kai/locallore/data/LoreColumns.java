@@ -1,4 +1,4 @@
-package com.example.kai.locallore.database;
+package com.example.kai.locallore.data;
 
 import net.simonvt.schematic.annotation.AutoIncrement;
 import net.simonvt.schematic.annotation.DataType;
