@@ -10,7 +10,7 @@ import android.widget.CursorAdapter;
  * Created by kchang on 5/3/16.
  */
 public class MapsAdapter extends CursorAdapter {
-    
+
     public MapsAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
