@@ -1,6 +1,7 @@
 package com.example.kai.locallore;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.kai.locallore.data.LoreColumns;
+import com.example.kai.locallore.data.LoreProvider;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -27,8 +30,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MapsActivity extends AppCompatActivity implements
+        OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
 
     private final String LOG_TAG = MapsActivity.class.getSimpleName();
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 3;
@@ -58,6 +64,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Insert example lore pins in database
+        ContentValues cv = new ContentValues();
+        cv.put(LoreColumns.TITLE, "Al Capone's Hangout");
+        cv.put(LoreColumns.LORE, "Al Capone and his friends were often found loitering on this corner");
+        cv.put(LoreColumns.LATITUDE, 52);
+        cv.put(LoreColumns.LONGITUDE, 88);
+        getApplicationContext().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
+
     }
 
 
