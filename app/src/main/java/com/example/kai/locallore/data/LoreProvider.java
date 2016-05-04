@@ -46,7 +46,7 @@ public class LoreProvider {
                 pathSegment = 1
         )
         public static Uri withId(long id) {
-            return buildUri(Path.LORE, String.valueOf(id);
+            return buildUri(Path.LORE, String.valueOf(id));
         }
     }
 }
