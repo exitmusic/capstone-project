@@ -14,14 +14,19 @@ import static net.simonvt.schematic.annotation.DataType.Type.REAL;
  */
 public interface LoreColumns {
 
-    @DataType(INTEGER) @PrimaryKey @AutoIncrement String _ID = "_id";
+    @DataType(INTEGER) @PrimaryKey @AutoIncrement
+    String _ID = "_id";
 
-    @DataType(TEXT) @NotNull String TITLE = "title";
+    @DataType(TEXT) @NotNull
+    String TITLE = "title";
 
-    @DataType(TEXT) @NotNull String LORE = "lore";
+    @DataType(TEXT) @NotNull
+    String LORE = "lore";
 
-    @DataType(REAL) @NotNull String LATITUDE = "latitude";
+    @DataType(REAL) @NotNull
+    String LATITUDE = "latitude";
 
-    @DataType(REAL) @NotNull String LONGITUDE = "longitude";
+    @DataType(REAL) @NotNull
+    String LONGITUDE = "longitude";
 
 }

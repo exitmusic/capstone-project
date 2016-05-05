@@ -18,7 +18,7 @@ public class LoreDatabase {
 
     public static final int VERSION = 1;
 
-    @Table(LoreDatabase.class)
+    @Table(LoreColumns.class)
     public static final String LORE = "lore";
 
     @OnCreate

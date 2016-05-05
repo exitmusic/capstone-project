@@ -1,11 +1,13 @@
 package com.example.kai.locallore.data;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.net.Uri;
 
 import net.simonvt.schematic.annotation.ContentProvider;
 import net.simonvt.schematic.annotation.ContentUri;
 import net.simonvt.schematic.annotation.InexactContentUri;
+import net.simonvt.schematic.annotation.NotifyInsert;
 import net.simonvt.schematic.annotation.TableEndpoint;
 
 /**
@@ -48,5 +50,10 @@ public class LoreProvider {
         public static Uri withId(long id) {
             return buildUri(Path.LORE, String.valueOf(id));
         }
+
+//        @NotifyInsert(paths = Path.LORE)
+//        public static Uri[] onInsert(ContentValues values) {
+//
+//        }
     }
 }
