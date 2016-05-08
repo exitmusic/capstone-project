@@ -9,12 +9,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kai.locallore.adapter.MapsAdapter;
@@ -35,11 +39,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MapsFragment extends AppCompatActivity implements
+public class MapsFragment extends Fragment implements
         OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener,
+
         LoaderManager.LoaderCallbacks<Cursor> {
 
     // Identifies a particular Loader being used in this component
@@ -48,42 +50,18 @@ public class MapsFragment extends AppCompatActivity implements
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 3;
 
     private GoogleMap mMap;
-    private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     protected Location mLastLocation;
-    protected PackageManager mPackageManager;
 
     @Bind(R.id.map_title) TextView mapTitle;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_maps);
-        ButterKnife.bind(this);
-        mPackageManager = getApplicationContext().getPackageManager();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_maps, container, false);
+        ButterKnife.bind(getActivity());
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        // Insert example lore pins in database
-        ContentValues cv = new ContentValues();
-        cv.put(LoreColumns.TITLE, "Al Capone's Hangout");
-        cv.put(LoreColumns.LORE, "Al Capone and his friends were often found loitering on this corner");
-        cv.put(LoreColumns.LATITUDE, 52);
-        cv.put(LoreColumns.LONGITUDE, 88);
-        getApplicationContext().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
-
-        // Initialize CursorLoader
-        // http://developer.android.com/training/load-data-background/setup-loader.html
-        //getLoaderManager().initLoader(LORE_LOADER, null, this);
+        return rootView;
     }
 
     /**
