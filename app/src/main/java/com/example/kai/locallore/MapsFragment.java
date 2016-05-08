@@ -2,7 +2,6 @@ package com.example.kai.locallore;
 
 import android.Manifest;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
@@ -15,9 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.kai.locallore.adapter.MapsAdapter;
@@ -38,7 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MapsActivity extends AppCompatActivity implements
+public class MapsFragment extends AppCompatActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -47,7 +44,7 @@ public class MapsActivity extends AppCompatActivity implements
 
     // Identifies a particular Loader being used in this component
     private static final int LORE_LOADER = 0;
-    private final String LOG_TAG = MapsActivity.class.getSimpleName();
+    private final String LOG_TAG = MapsFragment.class.getSimpleName();
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 3;
 
     private GoogleMap mMap;
