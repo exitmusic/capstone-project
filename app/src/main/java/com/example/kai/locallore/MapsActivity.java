@@ -154,13 +154,11 @@ public class MapsActivity extends AppCompatActivity implements
     @Override
     public void onConnectionSuspended(int i) {
         Log.v(LOG_TAG, "connection susupended");
-
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.v(LOG_TAG, "connection failed");
-
     }
 
     @Override
