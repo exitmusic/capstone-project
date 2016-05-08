@@ -34,11 +34,8 @@ public class MapsFragment extends Fragment implements
     // Identifies a particular Loader being used in this component
     private static final int LORE_LOADER = 0;
     private final String LOG_TAG = MapsFragment.class.getSimpleName();
-    private final int MY_PERMISSIONS_REQUEST_LOCATION = 3;
 
     private GoogleMap mMap;
-    private LocationRequest mLocationRequest;
-    protected Location mLastLocation;
 
     @Bind(R.id.map_title) TextView mapTitle;
 
@@ -52,6 +49,10 @@ public class MapsFragment extends Fragment implements
         SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Initialize CursorLoader
+        // http://developer.android.com/training/load-data-background/setup-loader.html
+        getLoaderManager().initLoader(LORE_LOADER, null, this);
 
         return rootView;
     }

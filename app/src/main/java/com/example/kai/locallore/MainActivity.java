@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.kai.locallore.data.LoreColumns;
 import com.example.kai.locallore.data.LoreProvider;
@@ -20,6 +21,9 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -34,10 +38,13 @@ public class MainActivity extends AppCompatActivity implements
     private LocationRequest mLocationRequest;
     protected Location mLastLocation;
 
+    @Bind(R.id.map_title) TextView mapTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         mPackageManager = getApplicationContext().getPackageManager();
 
@@ -54,10 +61,6 @@ public class MainActivity extends AppCompatActivity implements
         cv.put(LoreColumns.LATITUDE, 52);
         cv.put(LoreColumns.LONGITUDE, 88);
         getApplicationContext().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
-
-        // Initialize CursorLoader
-        // http://developer.android.com/training/load-data-background/setup-loader.html
-        //getLoaderManager().initLoader(LORE_LOADER, null, this);
     }
 
     @Override
@@ -129,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements
         Log.v(LOG_TAG, location.toString());
 
         mLastLocation = location;
-        //mapTitle.setText(String.valueOf(location.getLatitude()) +", " + String.valueOf(location.getLongitude()));
+        mapTitle.setText(String.valueOf(location.getLatitude()) +", " + String.valueOf(location.getLongitude()));
         showHome();
     }
 
