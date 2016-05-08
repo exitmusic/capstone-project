@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.kai.locallore.adapter.MapsAdapter;
 import com.example.kai.locallore.data.LoreColumns;
 import com.example.kai.locallore.data.LoreProvider;
 import com.google.android.gms.common.ConnectionResult;
@@ -82,9 +84,9 @@ public class MapsActivity extends AppCompatActivity implements
         cv.put(LoreColumns.LONGITUDE, 88);
         getApplicationContext().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
 
-        // Initial CursorLoader
+        // Initialize CursorLoader
+        // http://developer.android.com/training/load-data-background/setup-loader.html
         getLoaderManager().initLoader(LORE_LOADER, null, this);
-
     }
 
     /**
@@ -187,11 +189,14 @@ public class MapsActivity extends AppCompatActivity implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        return null;
+        return new CursorLoader(this, LoreProvider.Lore.CONTENT_URI, MapsAdapter.PROJECTION, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Handle the results
+        // http://developer.android.com/training/load-data-background/handle-results.html
+        Log.v(LOG_TAG, Integer.toString(data.getCount()));
 
     }
 

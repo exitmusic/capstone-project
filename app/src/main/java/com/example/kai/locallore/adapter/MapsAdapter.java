@@ -6,10 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
+import com.example.kai.locallore.data.LoreColumns;
+
 /**
  * Created by kchang on 5/3/16.
  */
 public class MapsAdapter extends CursorAdapter {
+
+    public static final String[] PROJECTION = new String[] {
+            LoreColumns._ID, LoreColumns.TITLE, LoreColumns.LATITUDE, LoreColumns.LONGITUDE
+    };
 
     public MapsAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
