@@ -86,7 +86,7 @@ public class MapsActivity extends AppCompatActivity implements
 
         // Initialize CursorLoader
         // http://developer.android.com/training/load-data-background/setup-loader.html
-        getLoaderManager().initLoader(LORE_LOADER, null, this);
+        //getLoaderManager().initLoader(LORE_LOADER, null, this);
     }
 
     /**
