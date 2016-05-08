@@ -41,7 +41,6 @@ import butterknife.ButterKnife;
 
 public class MapsFragment extends Fragment implements
         OnMapReadyCallback,
-
         LoaderManager.LoaderCallbacks<Cursor> {
 
     // Identifies a particular Loader being used in this component
@@ -60,6 +59,11 @@ public class MapsFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_maps, container, false);
         ButterKnife.bind(getActivity());
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         return rootView;
     }
@@ -84,87 +88,9 @@ public class MapsFragment extends Fragment implements
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = LocationRequest.create();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        mLocationRequest.setInterval(100000);
-
-        // Taken from http://developer.android.com/training/permissions/requesting.html
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == mPackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
-            // TODO: This returns null for some reason
-            //mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-        }
-
-        //mapTitle.setText(String.valueOf(mLastLocation.getLatitude()));
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // Taken from http://developer.android.com/training/permissions/requesting.html
-        switch(requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                if (grantResults.length > 0 && grantResults[0] == mPackageManager.PERMISSION_GRANTED) {
-                    // TODO: Not sure if this code is run
-                    //mapTitle.setText(String.valueOf(mLastLocation.getLatitude()));
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        Log.v(LOG_TAG, "connection susupended");
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.v(LOG_TAG, "connection failed");
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        Log.v(LOG_TAG, location.toString());
-
-        mLastLocation = location;
-        mapTitle.setText(String.valueOf(location.getLatitude()) +", " + String.valueOf(location.getLongitude()));
-        showHome();
-    }
-
-    public void showHome() {
-        if (mLastLocation != null) {
-            LatLng home = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            mMap.moveCamera((CameraUpdateFactory.newLatLng(home)));
-        }
-    }
-
-    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        return new CursorLoader(this, LoreProvider.Lore.CONTENT_URI, MapsAdapter.PROJECTION, null, null, null);
+        return new CursorLoader(getActivity(), LoreProvider.Lore.CONTENT_URI, MapsAdapter.PROJECTION, null, null, null);
     }
 
     @Override
