@@ -58,7 +58,7 @@ public class MapsFragment extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.fragment_maps);
         ButterKnife.bind(this);
         mPackageManager = getApplicationContext().getPackageManager();
 
