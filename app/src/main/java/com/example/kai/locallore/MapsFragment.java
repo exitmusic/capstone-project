@@ -50,9 +50,9 @@ public class MapsFragment extends Fragment implements
         ButterKnife.bind(getActivity());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);
 
         // Initialize CursorLoader
         // http://developer.android.com/training/load-data-background/setup-loader.html
