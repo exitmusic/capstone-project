@@ -39,6 +39,10 @@ public class MapsFragment extends Fragment implements
 
     @Bind(R.id.map_title) TextView mapTitle;
 
+    public MapsFragment() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class MapsFragment extends Fragment implements
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+//        mapFragment.getMapAsync(this);
 
         // Initialize CursorLoader
         // http://developer.android.com/training/load-data-background/setup-loader.html

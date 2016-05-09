@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements
     private LocationRequest mLocationRequest;
     protected Location mLastLocation;
 
-    @Bind(R.id.map_title) TextView mapTitle;
+//    @Bind(R.id.map_title) TextView mapTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,14 @@ public class MainActivity extends AppCompatActivity implements
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+
+        if (savedInstanceState == null) {
+            MapsFragment mapsFragment = new MapsFragment();
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.maps_container, mapsFragment)
+                    .commit();
+        }
 
         // Insert example lore pins in database
         ContentValues cv = new ContentValues();
@@ -132,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements
         Log.v(LOG_TAG, location.toString());
 
         mLastLocation = location;
-        mapTitle.setText(String.valueOf(location.getLatitude()) +", " + String.valueOf(location.getLongitude()));
+        //mapTitle.setText(String.valueOf(location.getLatitude()) +", " + String.valueOf(location.getLongitude()));
         showHome();
     }
 
