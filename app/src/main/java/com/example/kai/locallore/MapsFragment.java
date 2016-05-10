@@ -28,9 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MapsFragment extends Fragment implements
-        OnMapReadyCallback,
-        LoaderManager.LoaderCallbacks<Cursor> {
+public class MapsFragment extends Fragment implements OnMapReadyCallback, LoaderManager.LoaderCallbacks<Cursor> {
 
     // Identifies a particular Loader being used in this component
     private static final int LORE_LOADER = 0;
@@ -91,9 +89,18 @@ public class MapsFragment extends Fragment implements
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Handle the results
         // http://developer.android.com/training/load-data-background/handle-results.html
-        Log.v(LOG_TAG, Integer.toString(data.getCount()));
         data.moveToFirst();
-        Log.v(LOG_TAG, data.getString(data.getColumnIndex(LoreColumns.TITLE)));
+
+        String title = data.getString(data.getColumnIndex(LoreColumns.TITLE));
+        LatLng latLng = new LatLng(
+                data.getLong(data.getColumnIndex(LoreColumns.LATITUDE)),
+                data.getLong(data.getColumnIndex(LoreColumns.LONGITUDE)));
+        MarkerOptions marker = new MarkerOptions();
+        marker.position(latLng).title(title);
+
+        Log.v(LOG_TAG, Integer.toString(data.getCount()));
+        Log.v(LOG_TAG, title);
+        Log.v(LOG_TAG, marker.getPosition().toString());
     }
 
     @Override
