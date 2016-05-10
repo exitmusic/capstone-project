@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kai.locallore.adapter.MapsAdapter;
+import com.example.kai.locallore.data.LoreColumns;
 import com.example.kai.locallore.data.LoreProvider;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -91,7 +92,8 @@ public class MapsFragment extends Fragment implements
         // Handle the results
         // http://developer.android.com/training/load-data-background/handle-results.html
         Log.v(LOG_TAG, Integer.toString(data.getCount()));
-
+        data.moveToFirst();
+        Log.v(LOG_TAG, data.getString(data.getColumnIndex(LoreColumns.TITLE)));
     }
 
     @Override
