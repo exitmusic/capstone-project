@@ -3,6 +3,7 @@ package com.example.kai.locallore;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MapsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
         OnMapReadyCallback,
@@ -38,6 +40,7 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     private GoogleMap mMap;
 
     @Bind(R.id.map_title) TextView mapTitle;
+    @Bind(R.id.add_lore_fab) FloatingActionButton addLoreFab;
 
     public MapsFragment() {
 
@@ -59,6 +62,11 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
         getLoaderManager().initLoader(LORE_LOADER, null, this);
 
         return rootView;
+    }
+
+    @OnClick(R.id.add_lore_fab)
+    public void onFabClick() {
+
     }
 
     /**
