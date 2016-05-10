@@ -1,7 +1,6 @@
 package com.example.kai.locallore;
 
 import android.database.Cursor;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,9 +16,9 @@ import android.widget.TextView;
 import com.example.kai.locallore.adapter.MapsAdapter;
 import com.example.kai.locallore.data.LoreColumns;
 import com.example.kai.locallore.data.LoreProvider;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -28,7 +27,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback, LoaderManager.LoaderCallbacks<Cursor> {
+public class MapsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
+        OnMapReadyCallback,
+        OnMapLongClickListener {
 
     // Identifies a particular Loader being used in this component
     private static final int LORE_LOADER = 0;
@@ -77,6 +78,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Loader
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.setOnMapLongClickListener(this);
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Add Lore?"));
     }
 
     @Override
