@@ -23,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.Bind;
@@ -38,6 +39,7 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     private final String LOG_TAG = MapsFragment.class.getSimpleName();
 
     private GoogleMap mMap;
+    private Marker mAddMarker;
 
     @Bind(R.id.map_title) TextView mapTitle;
     @Bind(R.id.add_lore_fab) FloatingActionButton addLoreFab;
@@ -91,13 +93,13 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onMapLongClick(LatLng latLng) {
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Add Lore?"));
+        // Store the marker that was just added by the user at the location clicked
+        mAddMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Add Lore?"));
         addLoreFab.setVisibility(View.VISIBLE);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-
         return new CursorLoader(getActivity(), LoreProvider.Lore.CONTENT_URI, MapsAdapter.PROJECTION, null, null, null);
     }
 
