@@ -38,13 +38,10 @@ public class MainActivity extends AppCompatActivity implements
     private LocationRequest mLocationRequest;
     protected Location mLastLocation;
 
-//    @Bind(R.id.map_title) TextView mapTitle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
         mPackageManager = getApplicationContext().getPackageManager();
 

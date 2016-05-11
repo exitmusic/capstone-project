@@ -17,8 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/map_title"
-            android:text="wat" />
+            android:id="@+id/map_title" />
 
         <fragment
             android:id="@+id/map"
@@ -35,7 +34,8 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_width="56dp"
-        android:layout_height="56dp" />
+        android:layout_height="56dp"
+        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>
 
