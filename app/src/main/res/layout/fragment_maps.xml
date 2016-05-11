@@ -26,6 +26,13 @@
             android:layout_height="match_parent"
             tools:layout="@android:layout/simple_gallery_item" />
 
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/toggleButton"
+            android:layout_gravity="right" />
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -35,6 +42,7 @@
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_width="56dp"
         android:layout_height="56dp"
+        android:src="@drawable/ic_add_white_48dp"
         android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>
