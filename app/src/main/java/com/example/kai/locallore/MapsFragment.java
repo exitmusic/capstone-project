@@ -50,7 +50,6 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_maps, container, false);
-        ButterKnife.setDebug(true);
         ButterKnife.bind(this, rootView);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
