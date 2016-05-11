@@ -55,6 +55,16 @@
             android:name=".data.generated.LoreProvider"
             android:authorities="com.example.kai.locallore.LoreProvider"
             android:exported="false" />
+
+        <activity
+            android:name=".AddLoreActivity"
+            android:label="@string/title_activity_add_lore"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kai.locallore.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

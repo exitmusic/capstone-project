@@ -1,5 +1,6 @@
 package com.example.kai.locallore;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -68,7 +69,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @OnClick(R.id.add_lore_fab)
     public void onFabClick() {
-
+        Intent intent = new Intent(getActivity(), AddLoreActivity.class);
+        startActivity(intent);
     }
 
     /**
