@@ -2,4 +2,7 @@
     <string name="app_name">LocalLore</string>
     <string name="title_activity_maps">LocalLore</string>
     <string name="title_activity_add_lore">AddLoreActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
