@@ -95,6 +95,10 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onMapLongClick(LatLng latLng) {
+        // Remove most recent marker placed but not added to lore database
+        if (mAddMarker != null) {
+            mAddMarker.remove();
+        }
         // Store the marker that was just added by the user at the location clicked
         mAddMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Add Lore?"));
         addLoreFab.setVisibility(View.VISIBLE);
