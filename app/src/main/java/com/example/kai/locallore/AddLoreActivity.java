@@ -14,6 +14,10 @@ public class AddLoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lore);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if (savedInstanceState == null) {
             AddLoreFragment addLoreFragment = new AddLoreFragment();
 
@@ -21,7 +25,6 @@ public class AddLoreActivity extends AppCompatActivity {
                     .add(R.id.add_lore_container, addLoreFragment)
                     .commit();
         }
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
