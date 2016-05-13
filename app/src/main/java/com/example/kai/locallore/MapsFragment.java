@@ -42,7 +42,6 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     private GoogleMap mMap;
     private Marker mAddMarker;
 
-    @Bind(R.id.map_title) TextView mapTitle;
     @Bind(R.id.add_lore_fab) FloatingActionButton addLoreFab;
 
     public MapsFragment() {
