@@ -44,8 +44,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private GoogleMap mMap;
     private Marker mAddMarker;
-    private ArrayList<Lore> mLoreList;
-    private ArrayList<MarkerOptions> mLoreMarkers;
+    private ArrayList<Lore> mLoreList = new ArrayList<Lore>();
+    private ArrayList<MarkerOptions> mLoreMarkers = new ArrayList<MarkerOptions>();
 
     @Bind(R.id.add_lore_fab) FloatingActionButton addLoreFab;
 
@@ -99,9 +99,9 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        //MarkerOptions firstLore = mLoreMarkers.get(0);
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.setOnMapLongClickListener(this);
     }
@@ -143,10 +143,20 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
             } while(data.moveToNext());
         }
         data.close();
+
+        refreshMarkers();
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    public void refreshMarkers() {
+        if (!mLoreMarkers.isEmpty()) {
+            for (MarkerOptions loreMarker : mLoreMarkers) {
+                mMap.addMarker(loreMarker);
+            }
+        }
     }
 }
