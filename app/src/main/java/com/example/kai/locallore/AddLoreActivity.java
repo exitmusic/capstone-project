@@ -26,8 +26,7 @@ public class AddLoreActivity extends AppCompatActivity {
         double[] latLng = intent.getDoubleArrayExtra("LATLNG");
 
         if (savedInstanceState == null) {
-            AddLoreFragment addLoreFragment = new AddLoreFragment();
-            addLoreFragment.newInstance(latLng);
+            AddLoreFragment addLoreFragment = new AddLoreFragment().newInstance(latLng);
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.add_lore_container, addLoreFragment)

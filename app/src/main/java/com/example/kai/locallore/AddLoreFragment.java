@@ -62,12 +62,11 @@ public class AddLoreFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mLatLng = getArguments().getDoubleArray(ARG_LATLNG);
             mLatitude = mLatLng[0];
             mLongitude = mLatLng[1];
-
-            Log.v(LOG_TAG, String.valueOf(mLatLng[0]));
         }
     }
 
