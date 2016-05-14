@@ -1,5 +1,6 @@
 package com.example.kai.locallore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,8 +19,15 @@ public class AddLoreActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent intent = getIntent();
+        double[] latLng = intent.getDoubleArrayExtra("LATLNG");
+
         if (savedInstanceState == null) {
+            Bundle args = new Bundle();
+            args.putDoubleArray("LATLNG", latLng);
+
             AddLoreFragment addLoreFragment = new AddLoreFragment();
+            addLoreFragment.setArguments(args);
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.add_lore_container, addLoreFragment)
