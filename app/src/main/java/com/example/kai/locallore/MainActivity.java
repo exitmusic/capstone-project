@@ -99,8 +99,6 @@ public class MainActivity extends AppCompatActivity implements
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         }
-
-        //mapTitle.setText(String.valueOf(mLastLocation.getLatitude()));
     }
 
     @Override
