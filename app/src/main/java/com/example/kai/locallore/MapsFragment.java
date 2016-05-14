@@ -44,8 +44,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private GoogleMap mMap;
     private Marker mAddMarker;
-    private ArrayList<Lore> mLoreList = new ArrayList<Lore>();
-    private ArrayList<MarkerOptions> mLoreMarkers = new ArrayList<MarkerOptions>();
+    private ArrayList<Lore> mLoreList = new ArrayList<>();
+    private ArrayList<MarkerOptions> mLoreMarkers = new ArrayList<>();
 
     @Bind(R.id.add_lore_fab) FloatingActionButton addLoreFab;
 
