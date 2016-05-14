@@ -69,6 +69,9 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     @OnClick(R.id.add_lore_fab)
     public void onFabClick() {
         Intent intent = new Intent(getActivity(), AddLoreActivity.class);
+
+        intent.putExtra("LAT", mAddMarker.getPosition().latitude);
+        intent.putExtra("LONG", mAddMarker.getPosition().longitude);
         startActivity(intent);
     }
 
