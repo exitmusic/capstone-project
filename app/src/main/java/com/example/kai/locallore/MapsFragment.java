@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kai.locallore.adapter.MapsAdapter;
+import com.example.kai.locallore.data.Lore;
 import com.example.kai.locallore.data.LoreColumns;
 import com.example.kai.locallore.data.LoreProvider;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +44,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private GoogleMap mMap;
     private Marker mAddMarker;
+    private ArrayList<Lore> mLoreList;
+    private ArrayList<MarkerOptions> mLoreMarkers;
 
     @Bind(R.id.add_lore_fab) FloatingActionButton addLoreFab;
 
@@ -119,21 +124,22 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mLoreList.clear();
+
         // Handle the results
         // http://developer.android.com/training/load-data-background/handle-results.html
         if (data.moveToFirst()){
             do {
-                double latitude = data.getLong(data.getColumnIndex(LoreColumns.LATITUDE));
-                double longitude = data.getLong(data.getColumnIndex(LoreColumns.LONGITUDE));
                 String title = data.getString(data.getColumnIndex(LoreColumns.TITLE));
                 String lore = data.getString(data.getColumnIndex(LoreColumns.LORE));
+                double latitude = data.getLong(data.getColumnIndex(LoreColumns.LATITUDE));
+                double longitude = data.getLong(data.getColumnIndex(LoreColumns.LONGITUDE));
                 LatLng latLng = new LatLng(latitude, longitude);
-
                 MarkerOptions marker = new MarkerOptions().position(latLng).title(title);
 
-                Log.v(LOG_TAG, Integer.toString(data.getCount()));
-                Log.v(LOG_TAG, title);
-                Log.v(LOG_TAG, lore);
+                mLoreList.add(new Lore(title, lore, latitude, longitude));
+                mLoreMarkers.add(marker);
+
             } while(data.moveToNext());
         }
         data.close();
