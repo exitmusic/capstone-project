@@ -57,13 +57,15 @@
                 android:id="@+id/add_lore_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="@string/add_lore_cancel" />
 
             <Button
                 android:id="@+id/add_lore_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="@string/add_lore_confirm" />
         </LinearLayout>
 
     </LinearLayout>

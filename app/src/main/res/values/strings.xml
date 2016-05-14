@@ -6,4 +6,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="add_lore_title">Lore Title</string>
     <string name="add_lore_story">Add your lore here</string>
+    <string name="add_lore_cancel">Cancel</string>
+    <string name="add_lore_confirm">Add Lore</string>
 </resources>
