@@ -26,22 +26,22 @@
             android:text="Location Placeholder" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/add_lore_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/add_lore_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/add_lore_title" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/add_lore_story"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/add_lore_story"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/add_lore_story"/>

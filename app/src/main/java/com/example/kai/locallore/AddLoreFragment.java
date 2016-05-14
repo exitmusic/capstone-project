@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.kai.locallore.data.LoreColumns;
@@ -41,8 +42,8 @@ public class AddLoreFragment extends Fragment {
     private double mLongitude;
 
     @Bind(R.id.add_lore_location) TextView addLoreLocation;
-    @Bind(R.id.add_lore_title) TextInputLayout addLoreTitle;
-    @Bind(R.id.add_lore_story) TextInputLayout addLoreStory;
+    @Bind(R.id.add_lore_title) EditText addLoreTitle;
+    @Bind(R.id.add_lore_story) EditText addLoreStory;
     @Bind(R.id.add_lore_cancel) Button addLoreCancel;
     @Bind(R.id.add_lore_confirm) Button addLoreConfirm;
 
@@ -101,8 +102,8 @@ public class AddLoreFragment extends Fragment {
             @Override
             public void run() {
                 ContentValues cv = new ContentValues();
-                cv.put(LoreColumns.TITLE, addLoreTitle.getEditText().toString());
-                cv.put(LoreColumns.LORE, addLoreStory.getEditText().toString());
+                cv.put(LoreColumns.TITLE, addLoreTitle.getText().toString());
+                cv.put(LoreColumns.LORE, addLoreStory.getText().toString());
                 cv.put(LoreColumns.LATITUDE, mLatitude);
                 cv.put(LoreColumns.LONGITUDE, mLongitude);
                 getActivity().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);

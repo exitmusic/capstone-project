@@ -66,6 +66,12 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(LORE_LOADER, null, this);
+    }
+
     @OnClick(R.id.add_lore_fab)
     public void onFabClick() {
         Intent intent = new Intent(getActivity(), AddLoreActivity.class);
