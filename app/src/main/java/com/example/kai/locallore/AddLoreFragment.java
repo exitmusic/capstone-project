@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import butterknife.ButterKnife;
  * create an instance of this fragment.
  */
 public class AddLoreFragment extends Fragment {
+
+    private final String LOG_TAG = AddLoreFragment.class.getSimpleName();
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_LATLNG = "LATLNG";
 
@@ -62,6 +66,8 @@ public class AddLoreFragment extends Fragment {
             mLatLng = getArguments().getDoubleArray(ARG_LATLNG);
             mLatitude = mLatLng[0];
             mLongitude = mLatLng[1];
+
+            Log.v(LOG_TAG, String.valueOf(mLatLng[0]));
         }
     }
 
@@ -70,6 +76,8 @@ public class AddLoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_add_lore, container, false);
         ButterKnife.bind(this, rootView);
+
+        addLoreLocation.setText(String.valueOf(mLatitude) + ", " + String.valueOf(mLongitude));
 
         return rootView;
     }
