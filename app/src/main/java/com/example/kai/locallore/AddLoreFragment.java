@@ -3,6 +3,7 @@ package com.example.kai.locallore;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,7 +36,8 @@ public class AddLoreFragment extends Fragment {
     private double mLongitude;
 
     @Bind(R.id.add_lore_location) TextView addLoreLocation;
-    @Bind(R.id.add_lore_title) TextView addLoreTitle;
+    @Bind(R.id.add_lore_title) TextInputLayout addLoreTitle;
+    @Bind(R.id.add_lore_story) TextInputLayout addLoreStory;
     @Bind(R.id.add_lore_cancel) Button addLoreCancel;
     @Bind(R.id.add_lore_confirm) Button addLoreConfirm;
 

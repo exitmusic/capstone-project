@@ -25,19 +25,27 @@
             android:layout_weight="2"
             android:text="Location Placeholder" />
 
-        <TextView
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/add_lore_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Title Placeholder" />
+            android:layout_height="wrap_content">
 
-        <TextView
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/add_lore_title" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/add_lore_story"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="Story goes here" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/add_lore_story"/>
+        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

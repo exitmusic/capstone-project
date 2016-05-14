@@ -4,5 +4,6 @@
     <string name="title_activity_add_lore">AddLoreActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_lore_title">Lore Title</string>
+    <string name="add_lore_story">Add your lore here</string>
 </resources>
