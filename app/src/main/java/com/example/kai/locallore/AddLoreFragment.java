@@ -7,6 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 /**
@@ -24,6 +29,11 @@ public class AddLoreFragment extends Fragment {
     private double[] mLatLng;
     private double mLatitude;
     private double mLongitude;
+
+    @Bind(R.id.add_lore_location) TextView addLoreLocation;
+    @Bind(R.id.add_lore_title) TextView addLoreTitle;
+    @Bind(R.id.add_lore_cancel) Button addLoreCancel;
+    @Bind(R.id.add_lore_confirm) Button addLoreConfirm;
 
     public AddLoreFragment() {
         // Required empty public constructor
@@ -56,10 +66,12 @@ public class AddLoreFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_lore, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_add_lore, container, false);
+        ButterKnife.bind(this, rootView);
+
+        return rootView;
     }
-    
+
 }
