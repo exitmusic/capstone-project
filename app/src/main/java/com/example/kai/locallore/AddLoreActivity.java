@@ -23,11 +23,8 @@ public class AddLoreActivity extends AppCompatActivity {
         double[] latLng = intent.getDoubleArrayExtra("LATLNG");
 
         if (savedInstanceState == null) {
-            Bundle args = new Bundle();
-            args.putDoubleArray("LATLNG", latLng);
-
             AddLoreFragment addLoreFragment = new AddLoreFragment();
-            addLoreFragment.setArguments(args);
+            addLoreFragment.newInstance(latLng);
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.add_lore_container, addLoreFragment)
