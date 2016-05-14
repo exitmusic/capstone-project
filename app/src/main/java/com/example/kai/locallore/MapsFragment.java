@@ -115,18 +115,22 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Handle the results
         // http://developer.android.com/training/load-data-background/handle-results.html
-        data.moveToFirst();
+        if (data.moveToFirst()){
+            do {
+                double latitude = data.getLong(data.getColumnIndex(LoreColumns.LATITUDE));
+                double longitude = data.getLong(data.getColumnIndex(LoreColumns.LONGITUDE));
+                String title = data.getString(data.getColumnIndex(LoreColumns.TITLE));
+                String lore = data.getString(data.getColumnIndex(LoreColumns.LORE));
+                LatLng latLng = new LatLng(latitude, longitude);
 
-        String title = data.getString(data.getColumnIndex(LoreColumns.TITLE));
-        LatLng latLng = new LatLng(
-                data.getLong(data.getColumnIndex(LoreColumns.LATITUDE)),
-                data.getLong(data.getColumnIndex(LoreColumns.LONGITUDE)));
-        MarkerOptions marker = new MarkerOptions();
-        marker.position(latLng).title(title);
+                MarkerOptions marker = new MarkerOptions().position(latLng).title(title);
 
-        Log.v(LOG_TAG, Integer.toString(data.getCount()));
-        Log.v(LOG_TAG, title);
-        Log.v(LOG_TAG, marker.getPosition().toString());
+                Log.v(LOG_TAG, Integer.toString(data.getCount()));
+                Log.v(LOG_TAG, title);
+                Log.v(LOG_TAG, lore);
+            } while(data.moveToNext());
+        }
+        data.close();
     }
 
     @Override

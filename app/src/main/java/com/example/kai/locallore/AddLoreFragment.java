@@ -1,5 +1,6 @@
 package com.example.kai.locallore;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,8 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.kai.locallore.data.LoreColumns;
+import com.example.kai.locallore.data.LoreProvider;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -83,4 +88,25 @@ public class AddLoreFragment extends Fragment {
         return rootView;
     }
 
+    @OnClick(R.id.add_lore_cancel)
+    public void onCancelClick() {
+        Log.v(LOG_TAG, "Cancelled");
+    }
+
+    @OnClick(R.id.add_lore_confirm)
+    public void onConfirmClick() {
+        Log.v(LOG_TAG, "Lore Added");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ContentValues cv = new ContentValues();
+                cv.put(LoreColumns.TITLE, addLoreTitle.getEditText().toString());
+                cv.put(LoreColumns.LORE, addLoreStory.getEditText().toString());
+                cv.put(LoreColumns.LATITUDE, mLatitude);
+                cv.put(LoreColumns.LONGITUDE, mLongitude);
+                getActivity().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
+            }
+        }).start();
+    }
 }

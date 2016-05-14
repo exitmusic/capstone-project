@@ -62,14 +62,6 @@ public class MainActivity extends AppCompatActivity implements
                     .add(R.id.maps_container, mapsFragment)
                     .commit();
         }
-
-        // Insert example lore pins in database
-        ContentValues cv = new ContentValues();
-        cv.put(LoreColumns.TITLE, "Al Capone's Hangout");
-        cv.put(LoreColumns.LORE, "Al Capone and his friends were often found loitering on this corner");
-        cv.put(LoreColumns.LATITUDE, 52.168);
-        cv.put(LoreColumns.LONGITUDE, 88.390);
-        getApplicationContext().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
     }
 
     @Override

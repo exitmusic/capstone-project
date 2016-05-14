@@ -14,7 +14,7 @@ import com.example.kai.locallore.data.LoreColumns;
 public class MapsAdapter extends CursorAdapter {
 
     public static final String[] PROJECTION = new String[] {
-            LoreColumns._ID, LoreColumns.TITLE, LoreColumns.LATITUDE, LoreColumns.LONGITUDE
+            LoreColumns._ID, LoreColumns.LATITUDE, LoreColumns.LONGITUDE, LoreColumns.TITLE, LoreColumns.LORE
     };
 
     public MapsAdapter(Context context, Cursor c, int flags) {
