@@ -37,6 +37,7 @@ import butterknife.OnClick;
 
 public class MapsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
         OnMapReadyCallback,
+        GoogleMap.OnMapClickListener,
         OnMapLongClickListener {
 
     // Identifies a particular Loader being used in this component
@@ -105,9 +106,19 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        
+
         mMap.getUiSettings().setMapToolbarEnabled(false);
+        mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        // Remove most recent marker placed but not added to lore database
+        if (mAddMarker != null) {
+            mAddMarker.remove();
+        }
+        addLoreFab.setVisibility(View.GONE);
     }
 
     @Override
