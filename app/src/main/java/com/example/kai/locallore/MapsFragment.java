@@ -162,7 +162,7 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     public void refreshMarkers() {
-        if (!mLoreMarkers.isEmpty()) {
+        if (!mLoreMarkers.isEmpty() && mMap != null) {
             for (MarkerOptions loreMarker : mLoreMarkers) {
                 mMap.addMarker(loreMarker);
             }
@@ -173,6 +173,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
         Lore firstLore = mLoreList.get(0);
         LatLng myLocation = new LatLng(firstLore.getLatitude(), firstLore.getLongitude());
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        if (mMap != null) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        }
     }
 }

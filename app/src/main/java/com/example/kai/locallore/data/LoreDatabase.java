@@ -28,7 +28,7 @@ public class LoreDatabase {
 
     @OnUpgrade
     public static void onUpgrade(Context context, SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + LORE);
     }
 
     @OnConfigure
