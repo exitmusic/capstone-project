@@ -150,7 +150,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
                 mLoreList.add(new Lore(id, title, lore, latitude, longitude));
                 mLoreMarkers.add(marker);
 
-                Log.v(LOG_TAG, id);
+                // Uncomment this line to delete all rows from lore table
+                // getActivity().getContentResolver().delete(LoreProvider.Lore.withId(Long.parseLong(id)), null, null);
 
             } while(data.moveToNext());
         }
@@ -172,11 +173,16 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     public void refreshLocation() {
-        Lore firstLore = mLoreList.get(0);
-        LatLng myLocation = new LatLng(firstLore.getLatitude(), firstLore.getLongitude());
+        Lore firstLore;
+        LatLng myLocation;
 
-        if (mMap != null) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        if (!mLoreList.isEmpty()) {
+            firstLore = mLoreList.get(0);
+            myLocation = new LatLng(firstLore.getLatitude(), firstLore.getLongitude());
+
+            if (mMap != null) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+            }
         }
     }
 }
