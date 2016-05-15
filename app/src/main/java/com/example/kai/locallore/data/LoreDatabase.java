@@ -28,7 +28,8 @@ public class LoreDatabase {
 
     @OnUpgrade
     public static void onUpgrade(Context context, SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + LORE);
+        //db.execSQL("DROP TABLE IF EXISTS " + LORE);
+        //onCreate(context, db);
     }
 
     @OnConfigure
@@ -38,5 +39,4 @@ public class LoreDatabase {
 
     @ExecOnCreate
     public static final String EXEC_ON_CREATE = "SELECT * FROM " + LORE;
-
 }

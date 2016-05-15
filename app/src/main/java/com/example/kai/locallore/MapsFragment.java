@@ -150,6 +150,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
                 mLoreList.add(new Lore(id, title, lore, latitude, longitude));
                 mLoreMarkers.add(marker);
 
+                Log.v(LOG_TAG, id);
+
             } while(data.moveToNext());
         }
         refreshMarkers();

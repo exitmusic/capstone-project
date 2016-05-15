@@ -51,9 +51,5 @@ public class LoreProvider {
             return buildUri(Path.LORE, String.valueOf(id));
         }
 
-//        @NotifyInsert(paths = Path.LORE)
-//        public static Uri[] onInsert(ContentValues values) {
-//
-//        }
     }
 }
