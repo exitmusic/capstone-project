@@ -2,7 +2,6 @@ package com.example.kai.locallore;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -10,11 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.kai.locallore.adapter.MapsAdapter;
 import com.example.kai.locallore.data.Lore;
@@ -22,6 +19,7 @@ import com.example.kai.locallore.data.LoreColumns;
 import com.example.kai.locallore.data.LoreProvider;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -37,7 +35,7 @@ import butterknife.OnClick;
 
 public class MapsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
         OnMapReadyCallback,
-        GoogleMap.OnMapClickListener,
+        OnMapClickListener,
         OnMapLongClickListener {
 
     // Identifies a particular Loader being used in this component
