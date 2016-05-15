@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity implements
             // Add marker for current location
             ContentValues cv = new ContentValues();
             cv.put(LoreColumns._ID, "1");
-            cv.put(LoreColumns.TITLE, "");
-            cv.put(LoreColumns.LORE, "");
+            cv.put(LoreColumns.TITLE, "My Location");
+            cv.put(LoreColumns.LORE, "Long press a location to start adding lore!");
             cv.put(LoreColumns.LATITUDE, mLastLocation.getLatitude());
             cv.put(LoreColumns.LONGITUDE, mLastLocation.getLongitude());
 

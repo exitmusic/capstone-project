@@ -145,7 +145,11 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
                 double latitude = data.getLong(data.getColumnIndex(LoreColumns.LATITUDE));
                 double longitude = data.getLong(data.getColumnIndex(LoreColumns.LONGITUDE));
                 LatLng latLng = new LatLng(latitude, longitude);
-                MarkerOptions marker = new MarkerOptions().position(latLng).title(title);
+
+                MarkerOptions marker = new MarkerOptions()
+                        .position(latLng)
+                        .title(title)
+                        .snippet(lore);
 
                 mLoreList.add(new Lore(id, title, lore, latitude, longitude));
                 mLoreMarkers.add(marker);
