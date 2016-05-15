@@ -75,6 +75,7 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onResume() {
         super.onResume();
         getLoaderManager().restartLoader(LORE_LOADER, null, this);
+        Log.v(LOG_TAG, "Loader restarted");
     }
 
     @OnClick(R.id.add_lore_fab)
@@ -124,7 +125,9 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.v(LOG_TAG, "About to clear markers: " + data.getCount());
         mLoreList.clear();
+        mLoreMarkers.clear();
 
         // Handle the results
         // http://developer.android.com/training/load-data-background/handle-results.html
@@ -142,7 +145,6 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
             } while(data.moveToNext());
         }
-        data.close();
 
         refreshMarkers();
     }

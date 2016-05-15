@@ -98,7 +98,7 @@ public class AddLoreFragment extends Fragment {
     public void onConfirmClick() {
         Log.v(LOG_TAG, "Lore Added");
 
-        new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 ContentValues cv = new ContentValues();
@@ -108,6 +108,15 @@ public class AddLoreFragment extends Fragment {
                 cv.put(LoreColumns.LONGITUDE, mLongitude);
                 getActivity().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
             }
-        }).start();
+        });
+        t.start();
+
+        try {
+            // Wait for thread to finish before exiting to parent activity
+            t.join();
+            getActivity().finish();
+        } catch (Exception e) {
+            Log.v(LOG_TAG, e.toString());
+        }
     }
 }
