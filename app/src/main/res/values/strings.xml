@@ -4,6 +4,7 @@
     <string name="title_activity_add_lore">AddLoreActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="add_lore_location_title">Adding Lore To:</string>
     <string name="add_lore_title">Lore Title</string>
     <string name="add_lore_story">Add your lore here</string>
     <string name="add_lore_cancel">Cancel</string>
