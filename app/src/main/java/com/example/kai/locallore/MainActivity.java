@@ -84,21 +84,9 @@ public class MainActivity extends AppCompatActivity implements
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         mLocationRequest.setInterval(100000);
 
-        // Taken from http://developer.android.com/training/permissions/requesting.html
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == mPackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient,
-                    mLocationRequest,
-                    this);
-
-            // TODO: This returns null for some reason
-            //mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-        }
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                MY_PERMISSIONS_REQUEST_LOCATION);
+        readLocation();
     }
 
     @Override
@@ -106,14 +94,26 @@ public class MainActivity extends AppCompatActivity implements
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         // Taken from http://developer.android.com/training/permissions/requesting.html
-        switch(requestCode) {
+        switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == mPackageManager.PERMISSION_GRANTED) {
-                    // TODO: Not sure if this code is run
-                    //mapTitle.setText(String.valueOf(mLastLocation.getLatitude()));
+                    readLocation();
                 }
             }
         }
+    }
+
+    public void readLocation() {
+        // Taken from http://developer.android.com/training/permissions/requesting.html
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            Log.v(LOG_TAG, "permissions granted");
+            Log.v(LOG_TAG, mLastLocation.toString());
+        }
+
     }
 
     @Override
@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements
         Log.v(LOG_TAG, location.toString());
 
         mLastLocation = location;
-        //mapTitle.setText(String.valueOf(location.getLatitude()) +", " + String.valueOf(location.getLongitude()));
         showHome();
     }
 

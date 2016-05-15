@@ -2,6 +2,7 @@ package com.example.kai.locallore;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -104,7 +105,6 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        //MarkerOptions firstLore = mLoreMarkers.get(0);
         LatLng sydney = new LatLng(-34, 151);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
