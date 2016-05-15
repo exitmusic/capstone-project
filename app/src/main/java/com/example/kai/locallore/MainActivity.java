@@ -112,6 +112,14 @@ public class MainActivity extends AppCompatActivity implements
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             Log.v(LOG_TAG, "permissions granted");
             Log.v(LOG_TAG, mLastLocation.toString());
+
+            // Add marker for current location
+            ContentValues cv = new ContentValues();
+            cv.put(LoreColumns.TITLE, "");
+            cv.put(LoreColumns.LORE, "");
+            cv.put(LoreColumns.LATITUDE, mLastLocation.getLatitude());
+            cv.put(LoreColumns.LONGITUDE, mLastLocation.getLongitude());
+            getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
         }
 
     }

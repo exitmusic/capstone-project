@@ -44,6 +44,7 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     private final String LOG_TAG = MapsFragment.class.getSimpleName();
 
     private GoogleMap mMap;
+    private LatLng mCurrentLatLng;
     private Marker mAddMarker;
     private ArrayList<Lore> mLoreList = new ArrayList<>();
     private ArrayList<MarkerOptions> mLoreMarkers = new ArrayList<>();
@@ -105,9 +106,11 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng sydney = new LatLng(-34, 151);
+//        Lore firstLore = mLoreList.get(0);
+//        LatLng myLocation = new LatLng(firstLore.getLatitude(), firstLore.getLongitude());
+        LatLng myLocation = new LatLng(-40, 120);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
         mMap.setOnMapLongClickListener(this);
     }
 
@@ -150,6 +153,7 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
             } while(data.moveToNext());
         }
         refreshMarkers();
+        refreshLocation();
     }
 
     @Override
@@ -163,5 +167,12 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
                 mMap.addMarker(loreMarker);
             }
         }
+    }
+
+    public void refreshLocation() {
+        Lore firstLore = mLoreList.get(0);
+        LatLng myLocation = new LatLng(firstLore.getLatitude(), firstLore.getLongitude());
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
     }
 }
