@@ -74,8 +74,12 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onResume() {
         super.onResume();
+
+        // Remove previously added marker
+        if (mAddMarker != null) {
+            mAddMarker.remove();
+        }
         getLoaderManager().restartLoader(LORE_LOADER, null, this);
-        Log.v(LOG_TAG, "Loader restarted");
     }
 
     @OnClick(R.id.add_lore_fab)
@@ -125,7 +129,6 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        Log.v(LOG_TAG, "About to clear markers: " + data.getCount());
         mLoreList.clear();
         mLoreMarkers.clear();
 
@@ -133,6 +136,7 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
         // http://developer.android.com/training/load-data-background/handle-results.html
         if (data.moveToFirst()){
             do {
+                String id = data.getString(data.getColumnIndex(LoreColumns._ID));
                 String title = data.getString(data.getColumnIndex(LoreColumns.TITLE));
                 String lore = data.getString(data.getColumnIndex(LoreColumns.LORE));
                 double latitude = data.getLong(data.getColumnIndex(LoreColumns.LATITUDE));
@@ -140,12 +144,11 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
                 LatLng latLng = new LatLng(latitude, longitude);
                 MarkerOptions marker = new MarkerOptions().position(latLng).title(title);
 
-                mLoreList.add(new Lore(title, lore, latitude, longitude));
+                mLoreList.add(new Lore(id, title, lore, latitude, longitude));
                 mLoreMarkers.add(marker);
 
             } while(data.moveToNext());
         }
-
         refreshMarkers();
     }
 

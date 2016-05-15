@@ -5,16 +5,22 @@ package com.example.kai.locallore.data;
  */
 public class Lore {
 
+    private String id;
     private String title;
     private String lore;
     private double latitude;
     private double longitude;
 
-    public Lore(String title, String lore, double latitude, double longitude) {
+    public Lore(String id, String title, String lore, double latitude, double longitude) {
+        this.id = id;
         this.title = title;
         this.lore = lore;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     public String getTitle() {
@@ -34,7 +40,7 @@ public class Lore {
     }
 
     public String toString() {
-        return this.title + ", " + this.lore + ", " +
+        return this.id + ", " + this.title + ", " + this.lore + ", " +
                 String.valueOf(this.latitude) + ", " +
                 String.valueOf(this.longitude);
     }

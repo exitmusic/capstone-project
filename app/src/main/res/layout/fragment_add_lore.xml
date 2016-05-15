@@ -22,7 +22,6 @@
             android:id="@+id/add_lore_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:text="Location Placeholder" />
 
         <android.support.design.widget.TextInputLayout

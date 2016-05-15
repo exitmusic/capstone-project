@@ -92,6 +92,7 @@ public class AddLoreFragment extends Fragment {
     @OnClick(R.id.add_lore_cancel)
     public void onCancelClick() {
         Log.v(LOG_TAG, "Cancelled");
+        getActivity().finish();
     }
 
     @OnClick(R.id.add_lore_confirm)
