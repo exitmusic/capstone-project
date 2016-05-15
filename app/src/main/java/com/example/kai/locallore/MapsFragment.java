@@ -23,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -186,11 +187,15 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
         LatLng myLocation;
 
         if (!mLoreList.isEmpty()) {
-            firstLore = mLoreList.get(0);
+            firstLore = mLoreList.get(mLoreList.size()-1);
             myLocation = new LatLng(firstLore.getLatitude(), firstLore.getLongitude());
 
             if (mMap != null) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+                CameraPosition cp = new CameraPosition.Builder()
+                        .target(myLocation)
+                        .zoom(8)
+                        .build();
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
             }
         }
     }
