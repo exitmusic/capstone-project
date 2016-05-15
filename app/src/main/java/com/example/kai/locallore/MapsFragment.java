@@ -105,12 +105,8 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-//        Lore firstLore = mLoreList.get(0);
-//        LatLng myLocation = new LatLng(firstLore.getLatitude(), firstLore.getLongitude());
-        LatLng myLocation = new LatLng(-40, 120);
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        
+        mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.setOnMapLongClickListener(this);
     }
 
