@@ -98,8 +98,6 @@ public class AddLoreFragment extends Fragment {
 
     @OnClick(R.id.add_lore_confirm)
     public void onConfirmClick() {
-        Log.v(LOG_TAG, "Lore Added");
-
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -115,6 +113,7 @@ public class AddLoreFragment extends Fragment {
 
         try {
             // Wait for thread to finish before exiting to parent activity
+            Log.v(LOG_TAG, "Lore added");
             t.join();
             getActivity().finish();
         } catch (Exception e) {
