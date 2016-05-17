@@ -89,6 +89,7 @@ public class MapsFragment extends Fragment implements
         if (mAddMarker != null) {
             mAddMarker.remove();
         }
+        addLoreFab.setVisibility(View.GONE);
         getLoaderManager().restartLoader(LORE_LOADER, null, this);
     }
 
