@@ -18,10 +18,6 @@ public class AddLoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lore);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.add_lore_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         Intent intent = getIntent();
         double[] latLng = intent.getDoubleArrayExtra("LATLNG");
 
