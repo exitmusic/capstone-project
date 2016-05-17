@@ -3,6 +3,7 @@ package com.example.kai.locallore;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -39,6 +40,8 @@ public class AddLoreFragment extends Fragment {
     private static final String ARG_LATLNG = "LATLNG";
 
     private double[] mLatLng;
+    private String mTitle;
+    private String mLore;
     private double mLatitude;
     private double mLongitude;
 
@@ -98,26 +101,37 @@ public class AddLoreFragment extends Fragment {
 
     @OnClick(R.id.add_lore_confirm)
     public void onConfirmClick() {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ContentValues cv = new ContentValues();
-                cv.put(LoreColumns.TITLE, addLoreTitle.getText().toString());
-                cv.put(LoreColumns.LORE, addLoreStory.getText().toString());
-                cv.put(LoreColumns.LATITUDE, mLatitude);
-                cv.put(LoreColumns.LONGITUDE, mLongitude);
-                getActivity().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
-            }
-        });
-        t.start();
+        AddLoreTask addLoreTask = new AddLoreTask();
 
-        try {
-            // Wait for thread to finish before exiting to parent activity
-            Log.v(LOG_TAG, "Lore added");
-            t.join();
+        mTitle = addLoreTitle.getText().toString();
+        mLore = addLoreStory.getText().toString();
+        addLoreTask.execute();
+    }
+
+    private class AddLoreTask extends AsyncTask<String, Void, String> {
+
+        private final String LOG_TAG = AddLoreTask.class.getSimpleName();
+
+        @Override
+        protected String doInBackground(String... params) {
+            ContentValues cv = new ContentValues();
+
+            cv.put(LoreColumns.TITLE, mTitle);
+            cv.put(LoreColumns.LORE, mLore);
+            cv.put(LoreColumns.LATITUDE, mLatitude);
+            cv.put(LoreColumns.LONGITUDE, mLongitude);
+            getActivity().getContentResolver().insert(LoreProvider.Lore.CONTENT_URI, cv);
+            Log.v(LOG_TAG, "Adding lore");
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Log.v(LOG_TAG, "Added lore");
             getActivity().finish();
-        } catch (Exception e) {
-            Log.v(LOG_TAG, e.toString());
         }
     }
 }
