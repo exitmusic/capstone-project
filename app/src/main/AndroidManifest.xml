@@ -64,6 +64,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.kai.locallore.MainActivity" />
         </activity>
+
+        <receiver android:name=".AddLoreWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/add_lore_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
