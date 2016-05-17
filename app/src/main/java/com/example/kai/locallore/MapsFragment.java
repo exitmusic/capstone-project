@@ -1,14 +1,19 @@
 package com.example.kai.locallore;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,14 +39,17 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MapsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
+public class MapsFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<Cursor>,
         OnMapReadyCallback,
         OnMapClickListener,
-        OnMapLongClickListener {
+        OnMapLongClickListener,
+        ActivityCompat.OnRequestPermissionsResultCallback {
 
     // Identifies a particular Loader being used in this component
     private static final int LORE_LOADER = 0;
     private final String LOG_TAG = MapsFragment.class.getSimpleName();
+    private final int MY_LOCATION_REQUEST_CODE = 3;
 
     private GoogleMap mMap;
     private LatLng mCurrentLatLng;
@@ -109,6 +117,31 @@ public class MapsFragment extends Fragment implements LoaderManager.LoaderCallba
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
+
+        setMyLocationEnabled();
+    }
+
+    public void setMyLocationEnabled() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+            // Show rationale and request permission.
+            Log.v(LOG_TAG, "Permission not granted");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == MY_LOCATION_REQUEST_CODE) {
+            if (permissions.length == 1 &&
+                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                setMyLocationEnabled();
+            } else {
+                // Permission was denied. Display an error message.
+            }
+        }
     }
 
     @Override
