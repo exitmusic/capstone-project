@@ -28,7 +28,7 @@
                 android:id="@+id/add_lore_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textCapSentences"
+                android:inputType="textCapWords"
                 android:imeOptions="actionNext"
                 android:nextFocusDown="@+id/add_lore_story" />
         </android.support.design.widget.TextInputLayout>
@@ -43,42 +43,43 @@
                 android:id="@+id/add_lore_story"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textCapSentences"
-                android:minLines="3" />
+                android:inputType="textCapSentences|textMultiLine"
+                android:minLines="2" />
         </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/input_padding"
-            android:textSize="28dp"
+            android:textSize="18dp"
             android:textColor="@color/colorPrimaryDark"
             android:text="@string/add_lore_location_title"/>
         <TextView
             android:id="@+id/add_lore_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/add_lore_location_title"
             android:textColor="@color/colorPrimary"
             android:text="Location Placeholder" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/input_padding"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/add_lore_cancel"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/add_lore_button_height"
                 android:layout_weight="1"
                 android:text="@string/add_lore_cancel" />
 
             <Button
                 android:id="@+id/add_lore_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/add_lore_button_height"
                 android:layout_weight="1"
                 android:text="@string/add_lore_confirm" />
         </LinearLayout>

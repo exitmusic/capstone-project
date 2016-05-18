@@ -6,7 +6,9 @@
 
     <dimen name="fab_margin">24dp</dimen>
     <dimen name="app_bar_padding">56dp</dimen>
-    <dimen name="input_padding">18dp</dimen>
+    <dimen name="input_padding">28dp</dimen>
+    <dimen name="add_lore_location_title">16dp</dimen>
+    <dimen name="add_lore_button_height">60dp</dimen>
 
     <!--
     Refer to App Widget Documentation for margin information
