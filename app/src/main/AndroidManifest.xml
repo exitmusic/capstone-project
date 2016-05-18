@@ -65,7 +65,7 @@
                 android:value="com.example.kai.locallore.MainActivity" />
         </activity>
 
-        <receiver android:name=".AddLoreWidgetProvider">
+        <receiver android:name=".widget.AddLoreWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
