@@ -15,4 +15,6 @@
     http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_title_size">12sp</dimen>
+    <dimen name="widget_lore_size">10sp</dimen>
 </resources>
