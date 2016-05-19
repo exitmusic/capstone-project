@@ -177,7 +177,7 @@ public class MapsFragment extends Fragment implements
 
         // Handle the results
         // http://developer.android.com/training/load-data-background/handle-results.html
-        if (data.moveToFirst()){
+        if (data.moveToFirst()) {
             do {
                 String id = data.getString(data.getColumnIndex(LoreColumns._ID));
                 String title = data.getString(data.getColumnIndex(LoreColumns.TITLE));
