@@ -7,24 +7,26 @@
 
     <TextView
         android:id="@+id/appwidget_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/appwidget_title"
         android:text="@string/appwidget_title"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/widget_title_size"
-        android:padding="@dimen/widget_margin" />
+        android:layout_marginTop="@dimen/widget_margin"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/appwidget_lore"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/appwidget_lore"
         android:text="@string/appwidget_lore"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/widget_lore_size"
-        android:padding="@dimen/widget_margin" />
+        android:layout_margin="@dimen/widget_margin"
+        android:gravity="center" />
 
 </LinearLayout>
