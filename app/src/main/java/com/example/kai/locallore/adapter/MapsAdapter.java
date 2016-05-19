@@ -17,6 +17,10 @@ public class MapsAdapter extends CursorAdapter {
             LoreColumns._ID, LoreColumns.LATITUDE, LoreColumns.LONGITUDE, LoreColumns.TITLE, LoreColumns.LORE
     };
 
+    public static final String[] WIDGET_PROJECTION = new String[] {
+        LoreColumns.TITLE, LoreColumns.LORE
+    };
+
     public MapsAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }

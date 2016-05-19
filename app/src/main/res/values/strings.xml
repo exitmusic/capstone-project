@@ -9,6 +9,8 @@
     <string name="add_lore_story">Add your lore here</string>
     <string name="add_lore_cancel">Cancel</string>
     <string name="add_lore_confirm">Add Lore</string>
-    <string name="appwidget_text">EXAMPLE</string>
+
+    <string name="appwidget_title">Lore Title</string>
+    <string name="appwidget_lore">Lore</string>
     <string name="add_widget">Add widget</string>
 </resources>

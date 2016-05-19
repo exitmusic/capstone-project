@@ -14,11 +14,14 @@ public class AddLoreWidgetProvider extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
+        
+        CharSequence widgetTitle = context.getString(R.string.appwidget_title);
+        CharSequence widgetLore = context.getString(R.string.appwidget_lore);
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.add_lore_widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+        views.setTextViewText(R.id.appwidget_title, widgetTitle);
+        views.setTextViewText(R.id.appwidget_lore, widgetLore);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
