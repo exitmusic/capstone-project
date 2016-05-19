@@ -2,29 +2,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#09C"
+    android:background="@color/colorPrimary"
     android:padding="@dimen/widget_margin">
 
     <TextView
         android:id="@+id/appwidget_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="#09C"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/appwidget_title"
         android:text="@string/appwidget_title"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/widget_title_size" />
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/widget_title_size"
+        android:padding="@dimen/widget_margin" />
 
     <TextView
         android:id="@+id/appwidget_lore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="#09C"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/appwidget_lore"
         android:text="@string/appwidget_lore"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/widget_lore_size" />
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/widget_lore_size"
+        android:padding="@dimen/widget_margin" />
 
 </LinearLayout>
